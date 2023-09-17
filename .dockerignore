@@ -1,0 +1,9 @@
+vendor
+.ide
+vue
+*.tmp
+.git
+logs/
+.env
+.docker
+

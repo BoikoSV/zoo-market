@@ -1,0 +1,38 @@
+services:
+    nginx:
+        container_name: nginx
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+        -   8000:80
+        depends_on:
+            -   laravel
+        networks:
+            - net
+
+    laravel:
+        container_name: laravel
+        build:
+            context: .
+            dockerfile: ./docker/php-fpm/Dockerfile
+        ports:
+        -   9000:9000
+        networks:
+            - net
+
+    vue:
+        container_name: vue
+        build:
+            context: vue/
+            dockerfile: Dockerfile
+        ports:
+        -   80:80
+        depends_on:
+            -   laravel
+            -   nginx
+        networks:
+            - net
+
+networks:
+    net:
